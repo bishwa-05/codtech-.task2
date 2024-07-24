@@ -1,13 +1,9 @@
-here is the program that allows the user to track and manage 
-student grade .this prograam will:
 
-1.allow user to input for differnt subjects or assingment .
-2.calculate average grade
-3.display overall grade along with any additional information
+def calculate_average(grades):
+    if not grades:
+        return 0.0
+    return sum(grades) / len(grades)
 
-
-
-# Function to calculate GPA from average grade
 def calculate_gpa(average_grade):
     if average_grade >= 90:
         return 4.0
@@ -20,7 +16,6 @@ def calculate_gpa(average_grade):
     else:
         return 0.0
 
-# Function to calculate letter grade from average grade
 def calculate_letter_grade(average_grade):
     if average_grade >= 90:
         return 'A'
@@ -33,40 +28,26 @@ def calculate_letter_grade(average_grade):
     else:
         return 'F'
 
-# Main program
 def main():
-    grades = []
-    
-    while True:
-        grade_str = input("Enter grade (or 'q' to quit): ")
-        
-        if grade_str.lower() == 'q':
-            break
-        
-        try:
-            grade = float(grade_str)
-            if 0.0 <= grade <= 100.0:
-                grades.append(grade)
-            else:
-                print("Grade must be between 0 and 100.")
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-    
-    if len(grades) == 0:
-        print("No grades entered.")
-        return
-    
-    # Calculate average grade
-    average_grade = sum(grades) / len(grades)
-    
-    # Display results
-    print("\nGrade Summary:")
-    print("Number of grades:", len(grades))
-    print("Grades entered:", grades)
-    print("Average grade:", average_grade)
-    print("Letter grade:", calculate_letter_grade(average_grade))
-    print("GPA:", calculate_gpa(average_grade))
+    print("Welcome to the Student Grade Manager!")
 
-# Run the main program
+    subjects = ['Sanskrit', 'Maths', 'English', 'Science', 'Social Science', 'Computer Science']
+    grades = []
+
+    for subject in subjects:
+        grade = float(input(f"Enter grade for {subject}: "))
+        grades.append(grade)
+
+    average_grade = calculate_average(grades)
+    gpa = calculate_gpa(average_grade)
+    letter_grade = calculate_letter_grade(average_grade)
+
+    print("\n----- Summary -----")
+    for i in range(len(subjects)):
+        print(f"{subjects[i]}: {grades[i]}")
+    print(f"\nAverage Grade: {average_grade:.2f}")
+    print(f"Letter Grade: {letter_grade}")
+    print(f"GPA: {gpa:.2f}")
+
 if _name_ == "_main_":
     main()
