@@ -1,0 +1,72 @@
+here is the program that allows the user to track and manage 
+student grade .this prograam will:
+
+1.allow user to input for differnt subjects or assingment .
+2.calculate average grade
+3.display overall grade along with any additional information
+
+
+
+# Function to calculate GPA from average grade
+def calculate_gpa(average_grade):
+    if average_grade >= 90:
+        return 4.0
+    elif average_grade >= 80:
+        return 3.0
+    elif average_grade >= 70:
+        return 2.0
+    elif average_grade >= 60:
+        return 1.0
+    else:
+        return 0.0
+
+# Function to calculate letter grade from average grade
+def calculate_letter_grade(average_grade):
+    if average_grade >= 90:
+        return 'A'
+    elif average_grade >= 80:
+        return 'B'
+    elif average_grade >= 70:
+        return 'C'
+    elif average_grade >= 60:
+        return 'D'
+    else:
+        return 'F'
+
+# Main program
+def main():
+    grades = []
+    
+    while True:
+        grade_str = input("Enter grade (or 'q' to quit): ")
+        
+        if grade_str.lower() == 'q':
+            break
+        
+        try:
+            grade = float(grade_str)
+            if 0.0 <= grade <= 100.0:
+                grades.append(grade)
+            else:
+                print("Grade must be between 0 and 100.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+    
+    if len(grades) == 0:
+        print("No grades entered.")
+        return
+    
+    # Calculate average grade
+    average_grade = sum(grades) / len(grades)
+    
+    # Display results
+    print("\nGrade Summary:")
+    print("Number of grades:", len(grades))
+    print("Grades entered:", grades)
+    print("Average grade:", average_grade)
+    print("Letter grade:", calculate_letter_grade(average_grade))
+    print("GPA:", calculate_gpa(average_grade))
+
+# Run the main program
+if _name_ == "_main_":
+    main()
